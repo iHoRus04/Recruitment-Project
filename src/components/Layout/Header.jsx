@@ -36,7 +36,7 @@ function Header({ collapsed, onToggleCollapse }) {
         <Row align="middle" style={{ height: "64px", width: "100%", padding: "0 16px" }}>
           
        
-          <Col xs={12} sm={6} md={4}>
+          <Col flex={"none"}>
             <div className={"layout__header--logo" + (collapsed ? " active" : "")}>
               <Link to={isAdmin ? "/admin" : "/"}>
                 <img src={logo} alt="logo" style={{ height: "45px" }} />
@@ -48,7 +48,7 @@ function Header({ collapsed, onToggleCollapse }) {
           </Col>
 
           
-          <Col xs={0} sm={12} md={14}>
+          <Col  flex="auto">
             {!isAdmin ? (
               <Menu mode="horizontal" selectable={false} style={{ justifyContent: "center" }} items={items} />
             ) : (
@@ -61,7 +61,7 @@ function Header({ collapsed, onToggleCollapse }) {
           </Col>
 
           
-          <Col xs={12} sm={6} md={6} style={{ textAlign: "right" }}>
+          <Col flex="none" style={{ textAlign: "right" }}>
          
             <Button
               type="text"
@@ -76,9 +76,9 @@ function Header({ collapsed, onToggleCollapse }) {
               {token ? (
                 <>
                   {isAdmin ? (
-                    <Button onClick={() => navigate("/")}>Trang chủ</Button>
+                    <Button style={{marginRight:10}}  onClick={() => navigate("/")}>Trang chủ</Button>
                   ) : (
-                    <Button onClick={() => navigate("admin")}>Trang quản lí</Button>
+                    <Button style={{marginRight:10}}  onClick={() => navigate("admin")}>Trang quản lí</Button>
                   )}
                   <Logout />
                 </>
@@ -103,15 +103,18 @@ function Header({ collapsed, onToggleCollapse }) {
         style={{textAlign: "center"}}
       >
         {!isAdmin && <Menu mode="vertical" items={items} selectable={false} />}
-        <div style={{ marginTop: 16 }}>
+        <div style={{ marginTop: 16 , display:"flex", flexDirection:"column"}}>
           {token ? (
             <>
               {isAdmin ? (
-                <Button  onClick={() => navigate("/")}>Trang chủ</Button>
+                <Button style={{marginBottom:10}} onClick={() => navigate("/")}>Trang chủ</Button>
               ) : (
-                <Button  onClick={() => navigate("admin")}>Trang quản lí</Button>
+                <Button  style={{marginBottom:10}} onClick={() => navigate("admin")}>Trang quản lí</Button>
               )}
+             
               <Logout />
+              
+            
             </>
           ) : (
             <Flex vertical gap={10}>

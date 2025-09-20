@@ -22,8 +22,8 @@ const notificationSlice = createSlice({
     }
 })
 
-// export actions để dispatch trong component
+
 export const { showNotification, clearNotification } = notificationSlice.actions;
 
-// export reducer để add vào store
+
 export default notificationSlice.reducer;

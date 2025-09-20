@@ -15,12 +15,12 @@ function JobItem({ item ,company}) {
   return (
     <Link to={`/jobs/${item.id}`}>
     <Card hoverable style={{ marginBottom: 16,height: "100%" }}>
-      {/* Tiêu đề */}
+  
       <Title level={4} style={{ marginBottom: 12 }}>
         {item.name}
       </Title>
      
-      {/* Tags ngôn ngữ */}
+    
       <div style={{ marginBottom: 12 }}>
         
           {item.tags?.map((tag, i) => (
@@ -31,7 +31,6 @@ function JobItem({ item ,company}) {
         
       </div>
 
-      {/* Thông tin chi tiết */}
       <div style={{ lineHeight: "28px" }}>
         <Text>
           <EnvironmentOutlined style={{ color: "#fa8c16", marginRight: 8 }} />

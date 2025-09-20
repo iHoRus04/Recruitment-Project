@@ -10,7 +10,7 @@ function ManageJobs() {
   const id = Cookies.get("id");
   const [data, setData] = useState([]);
 
-  // ✅ khai báo fetchAPI bằng useCallback để tránh bị recreate khi re-render
+
   const fetchAPI = useCallback(async () => {
     const res = await getCompanyJobs(id);
     setData(res.reverse());
@@ -76,7 +76,7 @@ function ManageJobs() {
           <Link to={`/admin/manage-jobs/${record.id}`} state={{ record }}>
             Xem chi tiết
           </Link>
-          {/* ✅ Truyền fetchAPI xuống để reload bảng sau khi Edit */}
+       
           <EditJob record={record} onUpdate={fetchAPI} />
           <DeleteJob record={record} onUpdate={fetchAPI}/>
         </Space>

@@ -59,10 +59,10 @@ function CompanyStatistic() {
   }, [id]);
 
   return (
-    <div style={{ padding: 24 }}>
+    <div style={{ padding: 10 }}>
       <Title level={2}>Tổng quan công ty</Title>
 
-      {/* Thông tin công ty */}
+     
       {data.infoCompany && (
         <Card style={{ marginBottom: 24 }}>
           <Descriptions
@@ -104,7 +104,7 @@ function CompanyStatistic() {
         </Card>
       )}
 
-      {/* Thống kê Job */}
+      
       <Divider orientation="left">Thống kê công việc</Divider>
       <Row gutter={[16, 16]}>
         <Col xs={24} sm={12} md={8}>
@@ -132,7 +132,7 @@ function CompanyStatistic() {
         </Col>
       </Row>
 
-      {/* Thống kê CV */}
+  
       <Divider orientation="left">Thống kê hồ sơ</Divider>
       <Row gutter={[16, 16]}>
         <Col xs={24} sm={12} md={8}>

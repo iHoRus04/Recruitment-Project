@@ -17,7 +17,7 @@ function Logout() {
     navigate("/");
   }
 
-  return <Button   danger onClick={hdLogout} style={{margin: "0 20px"}}>Logout</Button>; // Không cần giao diện, chỉ xử lý rồi redirect
+  return <Button   danger onClick={hdLogout}>Logout</Button>; 
 }
 
 export default Logout;

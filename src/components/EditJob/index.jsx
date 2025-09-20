@@ -11,8 +11,8 @@ function EditJob({record,onUpdate }) {
         setIsModalOpen(false);
     };
     const handleSuccess = () => {
-    setIsModalOpen(false); // đóng modal
-    if (onUpdate) onUpdate(); // reload danh sách
+    setIsModalOpen(false);
+    if (onUpdate) onUpdate(); 
   };
     return (
         <>

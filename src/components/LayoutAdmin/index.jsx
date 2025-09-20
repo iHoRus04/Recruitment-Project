@@ -45,13 +45,13 @@ function LayoutAdmin() {
   return (
     <>
       <Layout style={{ minHeight: "100vh" }}>
-        {/* Header */}
+    
         <Header
           collapsed={collapsed}
           onToggleCollapse={() => setCollapsed(!collapsed)}
         />
 
-        {/* Phần thân: Sider + Content */}
+      
         <Layout>
           <Sider
             width={200}

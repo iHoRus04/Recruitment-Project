@@ -15,37 +15,35 @@ import {
     FileTextOutlined,
 } from "@ant-design/icons";
 import { statusCV } from "../../services/cvService";
+import dayjs from "dayjs";
 
 function DetailCV() {
     const [data, setData] = useState(null);
     const location = useLocation();
     const navigate = useNavigate();
-    console.log(location);
-    
+
     useEffect(() => {
         if (location.state?.record) {
             setData(location.state.record);
+
+            const fetchAPI = async () => {
+                try {
+                    await statusCV(location.state.record.id, { statusRead: true });
+                } catch (error) {
+                    console.error(error);
+                }
+            };
+            fetchAPI();
         } else {
             navigate("/admin/manage-cv");
         }
-        const fetchAPI = async ()=>{
-            try {
-                await statusCV(location.state.record.id,{statusRead: true});
-                
-            } catch (error) {
-                console.error(error);
-
-            }
-        }
-        fetchAPI();
     }, [location.state, navigate]);
-    console.log(data);
 
     if (!data) return null;
 
     return (
         <div style={{ padding: 24, background: "#f5f5f5", minHeight: "100vh" }}>
-            {/* Header */}
+
             <div
                 style={{
                     display: "flex",
@@ -54,38 +52,34 @@ function DetailCV() {
                 }}
             >
                 <h2 style={{ margin: 0 }}>📄 Thông tin CV</h2>
-                <Button
-                   
-                    icon={<ArrowLeftOutlined />}
-                    onClick={() => navigate(-1)}
-                >
+                <Button icon={<ArrowLeftOutlined />} onClick={() => navigate(-1)}>
                     Quay về
                 </Button>
             </div>
 
-            {/* CV Info */}
+
             <Card style={{ borderRadius: 12, boxShadow: "0 2px 8px rgba(0,0,0,0.1)" }}>
                 <Row gutter={[16, 16]}>
-                    <Col span={6}>
-                        <Card size="small" title="Họ tên" variant="outlined">
+                    <Col xs={24} sm={12} md={6}>
+                        <Card size="small" title="Họ tên">
                             <UserOutlined style={{ marginRight: 8 }} />
                             {data.fullName}
                         </Card>
                     </Col>
-                    <Col span={6}>
-                        <Card size="small" title="Địa chỉ" variant="outlined">
+                    <Col xs={24} sm={12} md={6}>
+                        <Card size="small" title="Địa chỉ">
                             <HomeOutlined style={{ marginRight: 8 }} />
                             {data.city}
                         </Card>
                     </Col>
-                    <Col span={6}>
-                        <Card size="small" title="Số điện thoại" variant="outlined">
+                    <Col xs={24} sm={12} md={6}>
+                        <Card size="small" title="Số điện thoại">
                             <PhoneOutlined style={{ marginRight: 8, color: "#1890ff" }} />
                             {data.phone}
                         </Card>
                     </Col>
-                    <Col span={6}>
-                        <Card size="small" title="Email" variant="outlined">
+                    <Col xs={24} sm={12} md={6}>
+                        <Card size="small" title="Email">
                             <MailOutlined style={{ marginRight: 8, color: "#ff4d4f" }} />
                             {data.email}
                         </Card>
@@ -104,44 +98,25 @@ function DetailCV() {
 
                 <Divider />
 
-                <Row>
-                    <Col span={24}>
-                        <Card
-                            title="Danh sách project"
-                            style={{ background: "#fafafa", borderRadius: 8 }}
-                        >
-                            <a
-                                href={data.linkProject}
-                                target="_blank"
-                                rel="noreferrer"
-                                style={{ fontSize: 16 }}
-                            >
-                                <LinkOutlined /> {data.linkProject}
-                            </a>
-                        </Card>
-                    </Col>
-                </Row>
-            </Card>
+                <Row> <Col span={24}> <Card title="Danh sách project" style={{ background: "#fafafa", borderRadius: 8 }} > <a href={data.linkProject} target="_blank" rel="noreferrer" style={{ fontSize: 16 }} > <LinkOutlined /> {data.linkProject} </a> </Card> </Col> </Row> </Card>
 
             <Divider />
 
-            {/* Job Info */}
+
             <h2 style={{ margin: "16px 0" }}>💼 Thông tin Công việc</h2>
             <Card
                 style={{
                     borderRadius: 12,
                     boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
                 }}
-                variant="outlined"
             >
                 {data.job && data.job.length > 0 ? (
                     <Row gutter={[16, 16]}>
-                        {/* Tên job */}
+
                         <Col span={24}>
                             <h3 style={{ marginBottom: 8 }}>{data.job[0].name}</h3>
                         </Col>
 
-                        {/* Tags */}
                         <Col span={24}>
                             <p>
                                 <TagsOutlined style={{ marginRight: 8, color: "#722ed1" }} />
@@ -156,40 +131,38 @@ function DetailCV() {
                             </div>
                         </Col>
 
-                        {/* Lương */}
-                        <Col span={12}>
+                        <Col xs={24} sm={12}>
                             <p>
                                 <DollarOutlined style={{ marginRight: 8, color: "#fa8c16" }} />
                                 <b>Mức lương:</b> {data.job[0].salary}
                             </p>
                         </Col>
 
-                        {/* Thành phố */}
-                        <Col span={12}>
+                        <Col xs={24} sm={12}>
                             <p>
                                 <EnvironmentOutlined style={{ marginRight: 8, color: "#52c41a" }} />
                                 <b>Thành phố:</b> {data.job[0].city?.join(", ")}
                             </p>
                         </Col>
 
-                        {/* Ngày tạo */}
-                        <Col span={12}>
+                        <Col xs={24} sm={12}>
                             <p>
                                 <CalendarOutlined style={{ marginRight: 8, color: "#1890ff" }} />
-                                <b>Ngày đăng:</b> {data.job[0].createAt}
+                                <b>Ngày đăng:</b>{" "}
+                                {dayjs(data.job[0].createAt).format("DD/MM/YYYY")}
                             </p>
                         </Col>
 
-                        {/* Ngày hết hạn */}
-                        <Col span={12}>
+                        <Col xs={24} sm={12}>
                             <p>
                                 <CalendarOutlined style={{ marginRight: 8, color: "#ff4d4f" }} />
-                                <b>Hết hạn:</b> {data.job[0].expiryAt}
+                                <b>Hết hạn:</b>{" "}
+                                {dayjs(data.job[0].expiryAt).format("DD/MM/YYYY")}
                             </p>
                         </Col>
 
-                        {/* Trạng thái */}
-                        <Col span={12}>
+
+                        <Col xs={24} sm={12}>
                             <p>
                                 <FileTextOutlined style={{ marginRight: 8, color: "#13c2c2" }} />
                                 <b>Trạng thái:</b>{" "}
@@ -201,7 +174,6 @@ function DetailCV() {
                             </p>
                         </Col>
 
-                        {/* Mô tả công việc */}
                         <Col span={24}>
                             <p>
                                 <FileTextOutlined style={{ marginRight: 8, color: "#13c2c2" }} />
@@ -216,8 +188,8 @@ function DetailCV() {
                     <p>❌ Không tìm thấy thông tin công việc</p>
                 )}
             </Card>
-
         </div>
     );
 }
+
 export default DetailCV;

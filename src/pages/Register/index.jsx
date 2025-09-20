@@ -41,7 +41,7 @@ function Register({ toLogin }) {
           message: "Đăng ký thành công",
         }))
         form.resetFields();
-        // Đóng modal sau khi đăng ký thành công
+       
         if (toLogin) {
           setTimeout(() => {
             toLogin();
@@ -84,7 +84,7 @@ function Register({ toLogin }) {
           requiredMark={false}
           onFinish={hdSubmit}
         >
-          {/* Họ và tên */}
+          
           <Form.Item
             label="Tên công ty"
             name="companyName"
@@ -97,7 +97,7 @@ function Register({ toLogin }) {
             />
           </Form.Item>
 
-          {/* Email */}
+         
           <Form.Item
             label="Email"
             name="email"
@@ -135,7 +135,7 @@ function Register({ toLogin }) {
           </Form.Item>
 
 
-          {/* Mật khẩu */}
+         
           <Form.Item
             label="Mật khẩu"
             name="password"
@@ -148,7 +148,7 @@ function Register({ toLogin }) {
             <Input.Password prefix={<LockOutlined />} size="large" />
           </Form.Item>
 
-          {/* Xác nhận mật khẩu */}
+         
           <Form.Item
             label="Xác nhận mật khẩu"
             name="confirm"
@@ -169,7 +169,7 @@ function Register({ toLogin }) {
             <Input.Password prefix={<LockOutlined />} size="large" />
           </Form.Item>
 
-          {/* Submit */}
+         
           <Form.Item>
             <Button block type="primary" htmlType="submit" loading={loading}>
               Đăng ký
