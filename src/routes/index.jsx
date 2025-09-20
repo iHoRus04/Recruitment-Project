@@ -10,7 +10,7 @@ import LayoutAdmin from "../components/LayoutAdmin";
 import CompanyStatistic from "../pages/Dashboard/CompanyStatistic";
 import InfoCompany from "../pages/Dashboard/InfoCompany";
 import ManageCV from "../pages/Dashboard/ManangeCV";
-import DetailCV from "../pages/Dashboard/detailCV";
+import DetailCV from "../pages/Dashboard/DetailCV";
 import ManageJobs from "../pages/Dashboard/ManageJobs";
 import DetailJob from "../pages/Dashboard/DetailJob";
 import CreateJob from "../components/CreateJob";
