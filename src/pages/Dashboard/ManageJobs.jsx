@@ -92,7 +92,7 @@ function ManageJobs() {
           <Link to={"/admin/create-job"}>Thêm việc làm</Link>
         </Button>
       </Flex>
-      <Table dataSource={data} rowKey={"id"} columns={columns} />
+      <Table dataSource={data} scroll={{x:900}} rowKey={"id"} columns={columns} />
     </div>
   );
 }

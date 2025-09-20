@@ -3,7 +3,15 @@ import { getCompanyJobs } from "../../services/jobService";
 import { getCompanyCV } from "../../services/cvService";
 import { findCompany } from "../../services/companiesService";
 import Cookies from "js-cookie";
-import { Card, Row, Col, Statistic, Typography, Divider, Descriptions } from "antd";
+import {
+  Card,
+  Row,
+  Col,
+  Statistic,
+  Typography,
+  Divider,
+  Descriptions,
+} from "antd";
 
 const { Title } = Typography;
 
@@ -57,17 +65,35 @@ function CompanyStatistic() {
       {/* Thông tin công ty */}
       {data.infoCompany && (
         <Card style={{ marginBottom: 24 }}>
-          <Descriptions title={data.infoCompany.companyName} bordered column={2}>
-            <Descriptions.Item label="Email">{data.infoCompany.email}</Descriptions.Item>
-            <Descriptions.Item label="Điện thoại">{data.infoCompany.phone}</Descriptions.Item>
-            <Descriptions.Item label="Địa chỉ">{data.infoCompany.address}</Descriptions.Item>
+          <Descriptions
+            title={data.infoCompany.companyName}
+            bordered
+            column={{ xs: 1, sm: 1, md: 2, lg: 2 }}
+          >
+            <Descriptions.Item label="Email">
+              {data.infoCompany.email}
+            </Descriptions.Item>
+            <Descriptions.Item label="Điện thoại">
+              {data.infoCompany.phone}
+            </Descriptions.Item>
+            <Descriptions.Item label="Địa chỉ">
+              {data.infoCompany.address}
+            </Descriptions.Item>
             <Descriptions.Item label="Website">
-              <a href={data.infoCompany.website} target="_blank" rel="noreferrer">
+              <a
+                href={data.infoCompany.website}
+                target="_blank"
+                rel="noreferrer"
+              >
                 {data.infoCompany.website}
               </a>
             </Descriptions.Item>
-            <Descriptions.Item label="Số nhân viên">{data.infoCompany.quantityPeople}</Descriptions.Item>
-            <Descriptions.Item label="Thời gian làm việc">{data.infoCompany.workingTime}</Descriptions.Item>
+            <Descriptions.Item label="Số nhân viên">
+              {data.infoCompany.quantityPeople}
+            </Descriptions.Item>
+            <Descriptions.Item label="Thời gian làm việc">
+              {data.infoCompany.workingTime}
+            </Descriptions.Item>
             <Descriptions.Item label="Mô tả" span={2}>
               {data.infoCompany.description}
             </Descriptions.Item>
@@ -80,40 +106,56 @@ function CompanyStatistic() {
 
       {/* Thống kê Job */}
       <Divider orientation="left">Thống kê công việc</Divider>
-      <Row gutter={16}>
-        <Col span={8}>
+      <Row gutter={[16, 16]}>
+        <Col xs={24} sm={12} md={8}>
           <Card>
             <Statistic title="Tổng số Job" value={data.totalJob} />
           </Card>
         </Col>
-        <Col span={8}>
+        <Col xs={24} sm={12} md={8}>
           <Card>
-            <Statistic title="Job đang mở" value={data.jobsOn} valueStyle={{ color: "#3f8600" }} />
+            <Statistic
+              title="Job đang mở"
+              value={data.jobsOn}
+              valueStyle={{ color: "#3f8600" }}
+            />
           </Card>
         </Col>
-        <Col span={8}>
+        <Col xs={24} sm={12} md={8}>
           <Card>
-            <Statistic title="Job đã đóng" value={data.jobsOff} valueStyle={{ color: "#cf1322" }} />
+            <Statistic
+              title="Job đã đóng"
+              value={data.jobsOff}
+              valueStyle={{ color: "#cf1322" }}
+            />
           </Card>
         </Col>
       </Row>
 
       {/* Thống kê CV */}
       <Divider orientation="left">Thống kê hồ sơ</Divider>
-      <Row gutter={16}>
-        <Col span={8}>
+      <Row gutter={[16, 16]}>
+        <Col xs={24} sm={12} md={8}>
           <Card>
             <Statistic title="Tổng số CV" value={data.totalCV} />
           </Card>
         </Col>
-        <Col span={8}>
+        <Col xs={24} sm={12} md={8}>
           <Card>
-            <Statistic title="CV đã đọc" value={data.cvOn} valueStyle={{ color: "#3f8600" }} />
+            <Statistic
+              title="CV đã đọc"
+              value={data.cvOn}
+              valueStyle={{ color: "#3f8600" }}
+            />
           </Card>
         </Col>
-        <Col span={8}>
+        <Col xs={24} sm={12} md={8}>
           <Card>
-            <Statistic title="CV chưa đọc" value={data.cvOff} valueStyle={{ color: "#faad14" }} />
+            <Statistic
+              title="CV chưa đọc"
+              value={data.cvOff}
+              valueStyle={{ color: "#faad14" }}
+            />
           </Card>
         </Col>
       </Row>

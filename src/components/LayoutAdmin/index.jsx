@@ -14,7 +14,7 @@ import {
 const { Sider, Content } = Layout;
 
 function LayoutAdmin() {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
 
   const items = [
     {

@@ -24,22 +24,22 @@ function Header({ collapsed, onToggleCollapse }) {
 
   // menu
   const items = [
-    { key: "home", label: <Link to="/">Trang chủ</Link> },
-    { key: "search", label: <Link to="/search">Tìm việc</Link> },
-    { key: "companies", label: <Link to="/companies">Công ty</Link> },
+    { key: "home", label: <Link onClick={() => setIsDrawerOpen(false)} to="/">Trang chủ</Link> },
+    { key: "search", label: <Link  onClick={() => setIsDrawerOpen(false)} to="/search">Tìm việc</Link> },
+    { key: "companies", label: <Link onClick={() => setIsDrawerOpen(false)} to="/companies">Công ty</Link> },
   ];
 
   return (
     <>
-      {/* Header cố định */}
+    
       <div className="layout__header" style={{ position: "sticky", top: 0, zIndex: 1000, background: "#fff" }}>
         <Row align="middle" style={{ height: "64px", width: "100%", padding: "0 16px" }}>
           
-          {/* Logo */}
+       
           <Col xs={12} sm={6} md={4}>
             <div className={"layout__header--logo" + (collapsed ? " active" : "")}>
               <Link to={isAdmin ? "/admin" : "/"}>
-                <img src={logo} alt="logo" style={{ height: "50px" }} />
+                <img src={logo} alt="logo" style={{ height: "45px" }} />
                 <span style={{ marginLeft: 8, color: "#002396", fontWeight: 600 }}>
                   {!collapsed && (isAdmin ? "Admin" : "JobIT")}
                 </span>
@@ -47,22 +47,22 @@ function Header({ collapsed, onToggleCollapse }) {
             </div>
           </Col>
 
-          {/* Navbar (ẩn trên mobile, hiện trên md+) */}
+          
           <Col xs={0} sm={12} md={14}>
             {!isAdmin ? (
               <Menu mode="horizontal" selectable={false} style={{ justifyContent: "center" }} items={items} />
             ) : (
               <div className={"button__collapsed" + (collapsed ? " active" : "")}>
-                <Button size="large" onClick={onToggleCollapse} style={{ marginLeft: 20 }}>
+                <Button size="large" onClick={onToggleCollapse}>
                   {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
                 </Button>
               </div>
             )}
           </Col>
 
-          {/* Actions */}
+          
           <Col xs={12} sm={6} md={6} style={{ textAlign: "right" }}>
-            {/* Mobile hamburger */}
+         
             <Button
               type="text"
               className="mobile-menu-btn"
@@ -71,7 +71,7 @@ function Header({ collapsed, onToggleCollapse }) {
               style={{ display: "inline-block" }}
             />
 
-            {/* Desktop actions */}
+           
             <div className="desktop-actions" style={{ display: "none" }}>
               {token ? (
                 <>
@@ -95,20 +95,21 @@ function Header({ collapsed, onToggleCollapse }) {
         </Row>
       </div>
 
-      {/* Drawer cho mobile */}
+    
       <Drawer
         placement="right"
         open={isDrawerOpen}
         onClose={() => setIsDrawerOpen(false)}
+        style={{textAlign: "center"}}
       >
         {!isAdmin && <Menu mode="vertical" items={items} selectable={false} />}
         <div style={{ marginTop: 16 }}>
           {token ? (
             <>
               {isAdmin ? (
-                <Button block onClick={() => navigate("/")}>Trang chủ</Button>
+                <Button  onClick={() => navigate("/")}>Trang chủ</Button>
               ) : (
-                <Button block onClick={() => navigate("admin")}>Trang quản lí</Button>
+                <Button  onClick={() => navigate("admin")}>Trang quản lí</Button>
               )}
               <Logout />
             </>
@@ -123,27 +124,22 @@ function Header({ collapsed, onToggleCollapse }) {
         </div>
       </Drawer>
 
-      {/* Modal login/register */}
+     
       <Modal
-        destroyOnClose
+        destroyOnHidden
         open={isModalOpen.status}
         onCancel={handleCancel}
         footer={null}
       >
         {isModalOpen.type === "login" ? (
-          <Login onClose={handleCancel} />
+          <Login closeDrawer={()=>setIsDrawerOpen(false)} onClose={handleCancel} />
         ) : (
           <Register toLogin={() => setIsModalOpen({ status: true, type: "login" })} />
         )}
       </Modal>
 
-      {/* CSS responsive inline */}
-      <style>{`
-        @media (min-width: 768px) {
-          .mobile-menu-btn { display: none !important; }
-          .desktop-actions { display: inline-block !important; }
-        }
-      `}</style>
+
+      
     </>
   );
 }

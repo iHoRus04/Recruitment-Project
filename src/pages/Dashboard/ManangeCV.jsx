@@ -9,21 +9,30 @@ import DeleteCV from "../../components/DeleteCV";
 
 function ManageCV() {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const id = Cookies.get("id");
-  
-  const fetchAPI = useCallback(async ()=>{
-     const [cvList, jobList] = await Promise.all([
+
+  const fetchAPI = useCallback(async () => {
+    setLoading(true);
+    try {
+      const [cvList, jobList] = await Promise.all([
         getCompanyCV(id),
         getJobs(),
       ]);
 
       const res = cvList.map((item) => ({
         ...item,
-        job: jobList.filter((job) => Number(job.id) === Number(item.idJob)),
+        job: jobList.find((job) => Number(job.id) === Number(item.idJob)),
       }));
 
       setData(res);
-  },[id]);
+    } catch (err) {
+      console.error("Lỗi khi load CV:", err);
+    } finally {
+      setLoading(false);
+    }
+  }, [id]);
+
   useEffect(() => {
     fetchAPI();
   }, [fetchAPI]);
@@ -32,7 +41,12 @@ function ManageCV() {
     {
       title: "Tên công việc",
       key: "jobName",
-      render: (_, record) => record.job?.[0]?.name || "Không xác định",
+      render: (_, record) =>
+        record.job ? (
+          record.job.name
+        ) : (
+          <Tag color="default">Job đã xoá</Tag>
+        ),
     },
     {
       title: "Họ tên ứng viên",
@@ -59,6 +73,11 @@ function ManageCV() {
       title: "Trạng thái",
       dataIndex: "statusRead",
       key: "statusRead",
+      filters: [
+        { text: "Đã đọc", value: true },
+        { text: "Chưa đọc", value: false },
+      ],
+      onFilter: (value, record) => record.statusRead === value,
       render: (_, record) =>
         record.statusRead ? (
           <Tag color="green">Đã đọc</Tag>
@@ -74,7 +93,7 @@ function ManageCV() {
           <Link to={`/admin/manage-cv/${record.id}`} state={{ record }}>
             Xem chi tiết
           </Link>
-          <DeleteCV record={record} onUpdate={fetchAPI}/>
+          <DeleteCV record={record} onUpdate={fetchAPI} />
         </Space>
       ),
     },
@@ -82,14 +101,15 @@ function ManageCV() {
 
   return (
     <div style={{ padding: 24, minHeight: "100vh" }}>
-      <h2 style={{ marginBottom: 16 }}> Danh sách CV</h2>
+      <h2 style={{ marginBottom: 16 }}>Danh sách CV</h2>
       <Table
-      
         dataSource={data}
         rowKey="id"
         columns={columns}
+        loading={loading}
         pagination={{ pageSize: 5 }}
         bordered
+        scroll={{ x: 900 }}
         style={{ background: "#fff", borderRadius: 12, overflow: "hidden" }}
       />
     </div>

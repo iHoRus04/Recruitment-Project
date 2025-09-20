@@ -8,7 +8,7 @@ import Cookies from "js-cookie";
 
 const { Title } = Typography;
 
-function Login({ onClose }) {
+function Login({ onClose ,closeDrawer}) {
   const dispatch = useDispatch();
   const onFinish = async (values) => {
   try {
@@ -19,7 +19,10 @@ function Login({ onClose }) {
         message: "Đăng nhập thành công",
         description: "Chào mừng bạn đã quay trở lại!",
       }));
-      if (onClose) onClose(); // đóng modal sau khi login
+      if (onClose && closeDrawer){
+        onClose();
+        closeDrawer();
+      }
       const user = res[0];
       
       const token = uuidv4();
@@ -75,7 +78,7 @@ function Login({ onClose }) {
           layout="vertical"
           requiredMark={false}
         >
-          {/* Email */}
+       
           <Form.Item
             label="Email"
             name="email"
@@ -91,7 +94,7 @@ function Login({ onClose }) {
             />
           </Form.Item>
 
-          {/* Password */}
+          
           <Form.Item
             label="Mật khẩu"
             name="password"
@@ -104,12 +107,12 @@ function Login({ onClose }) {
             />
           </Form.Item>
 
-          {/* Remember me */}
+          
           <Form.Item name="remember" valuePropName="checked">
             <Checkbox>Ghi nhớ đăng nhập</Checkbox>
           </Form.Item>
 
-          {/* Submit */}
+          
           <Form.Item>
             <Button type="primary" htmlType="submit" size="large" block>
               Đăng nhập

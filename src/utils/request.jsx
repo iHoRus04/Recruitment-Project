@@ -1,4 +1,5 @@
-const API_DOMAIN = "http://localhost:3000/";
+const API_DOMAIN = "https://recruitment-api-9nw9.onrender.com/";
+
 
 const request = async (path, options={})=>{
     try {

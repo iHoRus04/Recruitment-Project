@@ -110,7 +110,7 @@ function InfoCompany(){
                      </Form.Item>
                 </Col>
                 <Col span={12}>
-                    <Form.Item name="workingTime" label="Thời gian làm việc">
+                    <Form.Item name="workingTime" label="Thời gian làm">
                         <Input />
                     </Form.Item>
                 </Col>
