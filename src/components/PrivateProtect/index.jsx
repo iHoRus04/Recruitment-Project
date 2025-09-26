@@ -1,7 +1,7 @@
 import Cookies from "js-cookie";
 import { Navigate, Outlet } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { showNotification } from "../redux-toolkit/notificationSlice";
+import {showNotification} from "../../redux-toolkit/notificationSlice";
 
 function PrivateProtect() {
   const token = Cookies.get("token");
