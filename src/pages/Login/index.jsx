@@ -26,7 +26,7 @@ function Login({ onClose ,closeDrawer}) {
       const user = res[0];
       
       const token = uuidv4();
-       const expires = values.remember ? 7 : undefined;
+      const expires = values.remember ? 7 : undefined;
 
       Cookies.set("token", token, { expires });
       Cookies.set("id", user.id, { expires });

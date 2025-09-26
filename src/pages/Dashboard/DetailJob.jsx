@@ -11,12 +11,12 @@ import {
 
 function DetailJob() {
   const location = useLocation();
-  const job = location.state?.record; // lấy job trực tiếp
+  const job = location.state?.record; 
   const navigate = useNavigate();
 
   return (
     <>
-      {/* Nút quay về */}
+
       <Button
         icon={<ArrowLeftOutlined />}
         onClick={() => navigate(-1)}

@@ -108,12 +108,11 @@ function CompanyResult() {
         </Descriptions>
       </Card>
 
-      {/* Divider */}
+      
       <Divider style={{ fontSize: 18, fontWeight: "bold" }}>
         Danh sách công việc đang tuyển
       </Divider>
 
-      {/* Danh sách job */}
       <Card
         bordered={false}
         style={{ borderRadius: 12, boxShadow: "0 4px 12px rgba(0,0,0,0.08)" }}
